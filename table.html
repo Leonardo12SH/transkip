@@ -8,6 +8,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#667eea">
     <title>Hasil Transkrip Nilai</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -44,27 +47,6 @@
             font-size: 16px; 
             line-height: 1.6; 
         }
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 20px; 
-            font-size: 14px;
-        }
-        th, td { 
-            padding: 12px 15px; 
-            border: 1px solid #e1e5e9; 
-            text-align: left; 
-            word-wrap: break-word;
-            max-width: 200px;
-        }
-        thead tr { 
-            background-color: #f2f4f8; 
-            font-weight: 600; 
-        }
-        tfoot tr { 
-            background-color: #f2f4f8; 
-            font-weight: bold; 
-        }
         .loader { 
             border: 8px solid #f3f3f3; 
             border-radius: 50%; 
@@ -100,204 +82,23 @@
         .back-button:hover {
             background: #4cae4c;
         }
-        
-        /* Responsive Design untuk Mobile */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                width: 95%;
-                padding: 20px 15px;
-                border-radius: 10px;
-            }
-            
-            h1 {
-                font-size: 24px;
-                margin-bottom: 15px;
-            }
-            
-            #student-info {
-                padding: 15px;
-                font-size: 14px;
-                margin-bottom: 20px;
-            }
-            
-            /* Table responsive untuk mobile */
-            #table-container {
-                overflow-x: auto;
-                border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            }
-            
-            table {
-                font-size: 12px;
-                min-width: 600px; /* Minimum width untuk readability */
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                max-width: 150px;
-                font-size: 11px;
-            }
-            
-            /* Styling khusus untuk kolom tertentu di mobile */
-            th:nth-child(1), td:nth-child(1) { /* No. */
-                min-width: 40px;
-                max-width: 40px;
-            }
-            
-            th:nth-child(2), td:nth-child(2) { /* Kode MK */
-                min-width: 80px;
-                max-width: 80px;
-            }
-            
-            th:nth-child(3), td:nth-child(3) { /* Nama Mata Kuliah */
-                min-width: 200px;
-                max-width: 200px;
-            }
-            
-            th:nth-child(4), td:nth-child(4) { /* SKS */
-                min-width: 40px;
-                max-width: 40px;
-                text-align: center;
-            }
-            
-            th:nth-child(5), td:nth-child(5) { /* Nilai */
-                min-width: 50px;
-                max-width: 50px;
-                text-align: center;
-            }
-            
-            th:nth-child(6), td:nth-child(6) { /* Bobot */
-                min-width: 50px;
-                max-width: 50px;
-                text-align: center;
-            }
-            
-            th:nth-child(7), td:nth-child(7) { /* SKS x Bobot */
-                min-width: 80px;
-                max-width: 80px;
-                text-align: center;
-            }
-            
-            .back-button {
-                padding: 10px 20px;
-                font-size: 14px;
-                margin-top: 20px;
-            }
-        }
-        
-        /* Responsive Design untuk Tablet */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                width: 92%;
-                padding: 25px 20px;
-            }
-            
-            h1 {
-                font-size: 26px;
-            }
-            
-            table {
-                font-size: 13px;
-            }
-            
-            th, td {
-                padding: 10px 12px;
-                max-width: 180px;
-            }
-        }
-        
-        /* Responsive Design untuk layar sangat kecil */
-        @media (max-width: 480px) {
-            body {
-                padding: 5px;
-            }
-            
-            .container {
-                width: 98%;
-                padding: 15px 10px;
-                border-radius: 8px;
-            }
-            
-            h1 {
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-            
-            #student-info {
-                padding: 12px;
-                font-size: 13px;
-                margin-bottom: 15px;
-            }
-            
-            table {
-                font-size: 10px;
-                min-width: 500px;
-            }
-            
-            th, td {
-                padding: 6px 4px;
-                max-width: 120px;
-                font-size: 10px;
-            }
-            
-            .back-button {
-                padding: 8px 16px;
-                font-size: 12px;
-                margin-top: 15px;
-            }
-        }
-        
-        /* Optimasi untuk landscape mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .container {
-                padding: 15px 20px;
-            }
-            
-            h1 {
-                font-size: 22px;
-                margin-bottom: 10px;
-            }
-            
-            #student-info {
-                padding: 10px 15px;
-                margin-bottom: 15px;
-            }
-            
-            table {
-                font-size: 11px;
-            }
-            
-            th, td {
-                padding: 6px 8px;
-            }
-        }
-        
-        /* Animasi smooth untuk transisi */
         .container, #student-info, #table-container, .back-button {
             transition: all 0.3s ease;
         }
-        
-        /* Hover effects untuk mobile */
         @media (hover: hover) {
             .back-button:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(92, 184, 92, 0.3);
             }
         }
-        
-        /* Touch-friendly untuk mobile */
         @media (pointer: coarse) {
-            th, td {
-                padding: 10px 8px; /* Lebih besar untuk touch */
-            }
-            
             .back-button {
-                padding: 12px 24px; /* Lebih besar untuk touch */
+                padding: 12px 24px;
             }
+        }
+        /* Penyesuaian Bootstrap untuk tampilan yang lebih baik */
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa; /* Warna striping yang sama dengan info */
         }
     </style>
 </head>
@@ -307,8 +108,9 @@
         <div id="loader" class="loader"></div>
         <div id="student-info" style="display: none;"></div>
         <div id="error-message"></div>
-        <div id="table-container" style="overflow-x:auto; display: none;">
-            <table id="transcript-table">
+        
+        <div class="table-responsive" id="table-container" style="display: none;">
+            <table class="table table-striped table-hover table-bordered" id="transcript-table">
                 <thead>
                     <tr>
                         <th>No.</th><th>Kode MK</th><th>Nama Mata Kuliah</th><th>SKS</th><th>Nilai</th><th>Bobot</th><th>SKS x Bobot</th>
@@ -318,8 +120,11 @@
                 <tfoot id="transcript-foot"></tfoot>
             </table>
         </div>
+        
         <a href="index.html" class="back-button">Kembali ke Pencarian</a>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -329,12 +134,6 @@
             const tableBody = document.getElementById('transcript-body');
             const tableFoot = document.getElementById('transcript-foot');
             const errorMessageDiv = document.getElementById('error-message');
-
-            function showError(message) {
-                loader.style.display = 'none';
-                errorMessageDiv.textContent = message;
-                errorMessageDiv.style.display = 'block';
-            }
 
             const urlParams = new URLSearchParams(window.location.search);
             const nim = urlParams.get('nim');
@@ -347,607 +146,96 @@
             const originalApiUrl = `http://103.164.170.234:8081/api/public/mhstranskrip/${nim}?api=01071194`;
             const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(originalApiUrl)}`;
 
+            // Fungsi untuk menampilkan pesan error
+            function showError(message) {
+                loader.style.display = 'none';
+                errorMessageDiv.textContent = message;
+                errorMessageDiv.style.display = 'block';
+            }
+
+            // Fungsi untuk menghitung bobot berdasarkan nilai
+            function calculateBobot(nilai) {
+                if (!nilai || nilai === 'N/A') return 'N/A';
+                const grade = nilai.trim().toUpperCase();
+                const bobotMap = {
+                    'A': 4.00, 'A-': 3.67, 'B+': 3.33, 'B': 3.00,
+                    'B-': 2.67, 'C+': 2.33, 'C': 2.00, 'C-': 1.67,
+                    'D+': 1.33, 'D': 1.00, 'E': 0.00, 'F': 0.00
+                };
+                return bobotMap[grade] !== undefined ? bobotMap[grade] : 'N/A';
+            }
+
+            // Fungsi helper untuk menemukan nilai properti dengan nama yang bervariasi
+            function findProperty(item, possibleNames) {
+                for (let name of possibleNames) {
+                    if (item[name] !== undefined && item[name] !== null && item[name] !== '') {
+                        return item[name];
+                    }
+                }
+                return 'N/A';
+            }
+
             fetch(proxyUrl)
                 .then(response => {
                     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                    // Perubahan di sini: kita minta sebagai teks dulu untuk keamanan
-                    return response.text();
+                    return response.json();
                 })
-                .then(text => {
-                    // Coba parsing teks yang diterima sebagai JSON
-                    const result = JSON.parse(text);
-
-                    // Untuk debugging, Anda bisa lihat struktur data asli di konsol browser (F12)
-                    console.log('Data mentah yang diterima:', result);
-
-                    // ================= PERUBAHAN UTAMA DI SINI =================
-                    // Cek apakah data asli ada di dalam properti 'contents' (ciri khas proxy allorigins)
-                    // Jika ya, kita parse lagi isinya. Jika tidak, kita gunakan langsung.
-                    let actualData;
-                    if (result && typeof result.contents === 'string') {
-                        try {
-                            actualData = JSON.parse(result.contents);
-                        } catch (e) {
-                            throw new Error('Gagal mem-parsing data yang dibungkus oleh proxy.');
-                        }
-                    } else {
-                        actualData = result; // Anggap data tidak dibungkus
-                    }
-                    
-                    // Debug: tampilkan struktur data yang sudah di-parse
-                    console.log('Data yang sudah di-parse:', actualData);
-                    console.log('Tipe data:', typeof actualData);
-                    console.log('Apakah array?', Array.isArray(actualData));
-                    if (actualData && typeof actualData === 'object') {
-                        console.log('Keys yang tersedia:', Object.keys(actualData));
-                        // Tampilkan struktur nested jika ada
-                        Object.keys(actualData).forEach(key => {
-                            console.log(`Key: ${key}, Value:`, actualData[key]);
-                            if (actualData[key] && typeof actualData[key] === 'object') {
-                                console.log(`Keys dalam ${key}:`, Object.keys(actualData[key]));
-                            }
-                        });
-                    }
-                    
-                    // ==========================================================
-
+                .then(result => {
                     loader.style.display = 'none';
-                    
-                    // Fungsi helper untuk mencari data dalam struktur yang kompleks
-                    function findDataInStructure(obj, possiblePaths) {
-                        for (let path of possiblePaths) {
-                            let value = obj;
-                            let pathParts = path.split('.');
-                            for (let part of pathParts) {
-                                if (value && typeof value === 'object' && value[part] !== undefined) {
-                                    value = value[part];
-                                } else {
-                                    value = null;
-                                    break;
-                                }
-                            }
-                            if (value !== null) {
-                                return value;
-                            }
-                        }
-                        return null;
-                    }
-                    
-                    // Cek berbagai kemungkinan struktur data
-                    let studentDataArray = null;
-                    let studentInfo = null;
-                    
-                    // Coba berbagai kemungkinan path untuk data
-                    const possibleDataPaths = [
-                        'data',
-                        'result.data',
-                        'response.data',
-                        'transkrip',
-                        'nilai',
-                        'mata_kuliah',
-                        'courses',
-                        'subjects'
-                    ];
-                    
-                    for (let path of possibleDataPaths) {
-                        let data = findDataInStructure(actualData, [path]);
-                        if (data && Array.isArray(data) && data.length > 0) {
-                            studentDataArray = data;
-                            studentInfo = data[0];
-                            console.log(`Data ditemukan di path: ${path}`);
-                            break;
-                        }
-                    }
-                    
-                    // Jika masih tidak ditemukan, coba cek apakah actualData langsung array
-                    if (!studentDataArray && Array.isArray(actualData) && actualData.length > 0) {
-                        studentDataArray = actualData;
-                        studentInfo = actualData[0];
-                        console.log('Data ditemukan sebagai array langsung');
-                    }
-                    
-                    // Jika masih tidak ditemukan, coba cek struktur yang lebih dalam
-                    if (!studentDataArray) {
-                        console.log('Mencoba mencari data dalam struktur yang lebih dalam...');
-                        // Cari semua array dalam struktur
-                        function findAllArrays(obj, path = '') {
-                            let arrays = [];
-                            if (Array.isArray(obj)) {
-                                arrays.push({ path, data: obj });
-                            } else if (obj && typeof obj === 'object') {
-                                for (let key in obj) {
-                                    if (obj.hasOwnProperty(key)) {
-                                        arrays = arrays.concat(findAllArrays(obj[key], path ? `${path}.${key}` : key));
-                                    }
-                                }
-                            }
-                            return arrays;
-                        }
-                        
-                        let allArrays = findAllArrays(actualData);
-                        console.log('Semua array yang ditemukan:', allArrays);
-                        
-                        // Pilih array yang paling mungkin berisi data transkrip
-                        for (let arrayInfo of allArrays) {
-                            if (arrayInfo.data.length > 0 && 
-                                typeof arrayInfo.data[0] === 'object' && 
-                                Object.keys(arrayInfo.data[0]).length > 2) {
-                                studentDataArray = arrayInfo.data;
-                                studentInfo = arrayInfo.data[0];
-                                console.log(`Data ditemukan di path: ${arrayInfo.path}`);
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if (studentDataArray && studentInfo) {
-                        // Debug: tampilkan data mahasiswa pertama
-                        console.log('Data mahasiswa pertama:', studentInfo);
-                        console.log('Array data lengkap:', studentDataArray);
-                        console.log('Jumlah item data:', studentDataArray.length);
-                        
-                        // Tampilkan semua properti yang tersedia dalam item pertama
-                        console.log('Semua properti dalam item pertama:', Object.keys(studentInfo));
-                        console.log('Semua nilai dalam item pertama:', Object.values(studentInfo));
-                        
-                        // Tampilkan struktur data secara detail
-                        console.log('=== DETAIL STRUKTUR DATA ===');
-                        studentDataArray.slice(0, 3).forEach((item, index) => {
-                            console.log(`\n--- Item ${index} ---`);
-                            console.log('Tipe data:', typeof item);
-                            console.log('Semua keys:', Object.keys(item));
-                            console.log('Semua values:', Object.values(item));
-                            console.log('Raw item:', JSON.stringify(item, null, 2));
-                        });
-                        
-                        // Tampilkan semua properti yang tersedia dalam semua item
-                        console.log('\n=== SEMUA PROPERTI YANG TERSEDIA ===');
-                        let allKeys = new Set();
-                        studentDataArray.forEach(item => {
-                            Object.keys(item).forEach(key => allKeys.add(key));
-                        });
-                        console.log('Semua properti yang tersedia:', Array.from(allKeys));
-                        
-                        // Coba cari properti yang mungkin berisi data yang kita butuhkan
-                        console.log('\n=== ANALISIS PROPERTI ===');
-                        allKeys.forEach(key => {
-                            let sampleValues = studentDataArray.slice(0, 3).map(item => item[key]).filter(val => val !== undefined && val !== null && val !== '');
-                            if (sampleValues.length > 0) {
-                                console.log(`Properti "${key}":`, sampleValues);
-                            }
-                        });
-                        
-                        // Cari item yang memiliki nilai "A" untuk analisis
-                        console.log('\n=== ANALISIS ITEM DENGAN NILAI ===');
-                        studentDataArray.forEach((item, index) => {
-                            // Cari properti yang berisi nilai huruf (A, B, C, D, E, F)
-                            for (let key in item) {
-                                let value = item[key];
-                                if (typeof value === 'string' && /^[A-F]$/i.test(value)) {
-                                    console.log(`Item ${index} - Properti "${key}" berisi nilai: ${value}`);
-                                    console.log('Item lengkap:', item);
-                                    break;
-                                }
-                            }
-                        });
-                        
-                        // Analisis item yang memiliki nilai "A-" untuk melihat struktur data
-                        console.log('\n=== ANALISIS ITEM DENGAN NILAI A- ===');
-                        studentDataArray.forEach((item, index) => {
-                            for (let key in item) {
-                                let value = item[key];
-                                if (typeof value === 'string' && value === 'A-') {
-                                    console.log(`Item ${index} - Properti "${key}" berisi nilai: ${value}`);
-                                    console.log('Semua properti item ini:', Object.keys(item));
-                                    console.log('Semua nilai item ini:', Object.values(item));
-                                    console.log('Raw item:', JSON.stringify(item, null, 2));
-                                    break;
-                                }
-                            }
-                        });
-                        
-                                                 // Fungsi untuk menghitung bobot berdasarkan nilai
-                         function calculateBobot(nilai) {
-                             if (!nilai || nilai === 'N/A') return 'N/A';
-                             
-                             // Bersihkan nilai dari spasi
-                             nilai = nilai.trim();
-                             
-                             switch (nilai) {
-                                 case 'A': return 4.00;
-                                 case 'A-': return 3.67; // Perbaikan: A- = 3.67 bukan 3.7
-                                 case 'B+': return 3.33; // Perbaikan: B+ = 3.33 bukan 3.3
-                                 case 'B': return 3.00;
-                                 case 'B-': return 2.67; // Perbaikan: B- = 2.67 bukan 2.7
-                                 case 'C+': return 2.33; // Perbaikan: C+ = 2.33 bukan 2.3
-                                 case 'C': return 2.00;
-                                 case 'C-': return 1.67; // Perbaikan: C- = 1.67 bukan 1.7
-                                 case 'D+': return 1.33; // Perbaikan: D+ = 1.33 bukan 1.3
-                                 case 'D': return 1.00;
-                                 case 'E': return 0.00;
-                                 case 'F': return 0.00;
-                                 default: return 'N/A';
-                             }
-                         }
-                        
-                        // Gunakan properti yang benar sesuai dengan response API
-                        const nim = studentInfo.STB || studentInfo.nim || studentInfo.NIM || studentInfo.nim_mahasiswa || 'N/A';
-                        const nama = studentInfo.NMMHS || studentInfo.nama || studentInfo.NAMA || studentInfo.nama_mahasiswa || studentInfo.nama_lengkap || 'N/A';
-                        const prodi = studentInfo.NMPRGSTD || studentInfo.prodi || studentInfo.PRODI || studentInfo.program_studi || studentInfo.jurusan || 'N/A';
-                        
-                        studentInfoDiv.innerHTML = `<strong>NIM:</strong> ${nim}<br><strong>Nama:</strong> ${nama}<br><strong>Program Studi:</strong> ${prodi}`;
-                        studentInfoDiv.style.display = 'block';
 
-                        tableBody.innerHTML = '';
-                        studentDataArray.forEach((item, index) => {
-                            // Debug: tampilkan setiap item data dengan detail lengkap
-                            console.log(`Item ${index}:`, item);
-                            console.log(`Keys item ${index}:`, Object.keys(item));
-                            console.log(`Values item ${index}:`, Object.values(item));
-                            
-                            // Fungsi helper untuk mencari properti dengan berbagai kemungkinan nama
-                            function findPropertyValue(item, possibleNames) {
-                                for (let name of possibleNames) {
-                                    if (item[name] !== undefined && item[name] !== null && item[name] !== '') {
-                                        return item[name];
-                                    }
-                                }
-                                return 'N/A';
-                            }
-                            
-                            // Fungsi untuk mencari properti dengan pattern matching
-                            function findPropertyByPattern(item, patterns) {
-                                for (let pattern of patterns) {
-                                    // Coba exact match
-                                    if (item[pattern] !== undefined && item[pattern] !== null && item[pattern] !== '') {
-                                        return item[pattern];
-                                    }
-                                    
-                                    // Coba case insensitive match
-                                    for (let key in item) {
-                                        if (key.toLowerCase() === pattern.toLowerCase() && 
-                                            item[key] !== undefined && item[key] !== null && item[key] !== '') {
-                                            return item[key];
-                                        }
-                                    }
-                                    
-                                    // Coba partial match
-                                    for (let key in item) {
-                                        if (key.toLowerCase().includes(pattern.toLowerCase()) && 
-                                            item[key] !== undefined && item[key] !== null && item[key] !== '') {
-                                            return item[key];
-                                        }
-                                    }
-                                }
-                                return 'N/A';
-                            }
-                            
-                            // Fungsi untuk mencari properti dengan pendekatan yang lebih agresif
-                            function findPropertyAggressively(item, targetType) {
-                                // Coba semua properti yang tersedia
-                                for (let key in item) {
-                                    let value = item[key];
-                                    if (value !== undefined && value !== null && value !== '') {
-                                        // Coba deteksi tipe data berdasarkan nama properti atau nilai
-                                        if (targetType === 'kode' && (
-                                            key.toLowerCase().includes('kode') || 
-                                            key.toLowerCase().includes('code') ||
-                                            key.toLowerCase().includes('kd') ||
-                                            key.toLowerCase().includes('mk') ||
-                                            (typeof value === 'string' && value.length <= 10 && /^[A-Z0-9]+$/i.test(value))
-                                        )) {
-                                            return value;
-                                        }
-                                        
-                                        if (targetType === 'nama' && (
-                                            key.toLowerCase().includes('nama') || 
-                                            key.toLowerCase().includes('name') ||
-                                            key.toLowerCase().includes('mata') ||
-                                            key.toLowerCase().includes('kuliah') ||
-                                            (typeof value === 'string' && value.length > 10 && /[a-zA-Z\s]/.test(value))
-                                        )) {
-                                            return value;
-                                        }
-                                        
-                                        if (targetType === 'nilai' && (
-                                            key.toLowerCase().includes('nilai') || 
-                                            key.toLowerCase().includes('grade') ||
-                                            key.toLowerCase().includes('huruf') ||
-                                            key.toLowerCase().includes('score') ||
-                                            (typeof value === 'string' && /^[A-F]$/i.test(value)) ||
-                                            (typeof value === 'string' && /^[A-F][+-]?$/i.test(value)) ||
-                                            (typeof value === 'string' && /^[A-F][0-9]?$/i.test(value))
-                                        )) {
-                                            return value;
-                                        }
-                                        
-                                        if (targetType === 'bobot' && (
-                                            key.toLowerCase().includes('bobot') || 
-                                            key.toLowerCase().includes('point') ||
-                                            key.toLowerCase().includes('angka') ||
-                                            key.toLowerCase().includes('weight') ||
-                                            (typeof value === 'number' && value >= 0 && value <= 4) ||
-                                            (typeof value === 'string' && /^[0-4](\.[0-9]+)?$/.test(value))
-                                        )) {
-                                            return value;
-                                        }
-                                        
-                                        if (targetType === 'total' && (
-                                            key.toLowerCase().includes('total') || 
-                                            key.toLowerCase().includes('hasil') ||
-                                            key.toLowerCase().includes('result') ||
-                                            (typeof value === 'number' && value > 0) ||
-                                            (typeof value === 'string' && /^[0-9]+(\.[0-9]+)?$/.test(value))
-                                        )) {
-                                            return value;
-                                        }
-                                    }
-                                }
-                                return 'N/A';
-                            }
-                            
-                            // Fungsi untuk mencari properti berdasarkan nilai yang sudah berhasil
-                            function findPropertyByValue(item, targetType) {
-                                for (let key in item) {
-                                    let value = item[key];
-                                    if (value !== undefined && value !== null && value !== '') {
-                                        if (targetType === 'nilai') {
-                                            // Cari properti yang berisi nilai huruf (A, B, C, D, E, F)
-                                            if (typeof value === 'string' && /^[A-F][+-]?$/i.test(value)) {
-                                                 return value;
-                                            }
-                                        } else if (targetType === 'bobot') {
-                                            // Cari properti yang berisi angka bobot (0-4)
-                                            if (typeof value === 'number' && value >= 0 && value <= 4) {
-                                                return value;
-                                            }
-                                            if (typeof value === 'string' && /^[0-4](\.[0-9]+)?$/.test(value)) {
-                                                return parseFloat(value);
-                                            }
-                                        } else if (targetType === 'total') {
-                                            // Cari properti yang berisi angka total
-                                            if (typeof value === 'number' && value > 0) {
-                                                return value;
-                                            }
-                                            if (typeof value === 'string' && /^[0-9]+(\.[0-9]+)?$/.test(value)) {
-                                                return parseFloat(value);
-                                            }
-                                        }
-                                    }
-                                }
-                                return 'N/A';
-                            }
-                            
-                            // Coba semua kemungkinan nama properti yang mungkin digunakan
-                            const kodeMK = item.KDMTK || findPropertyAggressively(item, 'kode') || findPropertyByPattern(item, [
-                                'kodemk', 'kode_mk', 'kode', 'kode_matkul', 'kode_mata_kuliah', 
-                                'mata_kuliah', 'kd_mk', 'mk', 'matkul', 'course_code', 'subject_code',
-                                'kode', 'kd', 'mk', 'matkul', 'course', 'subject', 'kode_matkul'
-                            ]);
-                            
-                            const namaMK = item.NMMTK || findPropertyAggressively(item, 'nama') || findPropertyByPattern(item, [
-                                'namamk', 'nama_mk', 'mata_kuliah', 'nama_matkul', 
-                                'nama_mata_kuliah', 'mk', 'nama', 'nama_course', 'subject_name',
-                                'course_name', 'matkul_nama', 'nama', 'mata', 'kuliah', 'course', 'subject'
-                            ]);
-                            
-                            const sks = item.SKS || findPropertyByPattern(item, [
-                                'sks', 'credits', 'credit_hours', 'jam_sks', 'jam', 'credit'
-                            ]);
-                            
-                            // Coba cari nilai dengan berbagai pendekatan - PERBAIKAN UTAMA
-                            let nilai = item.nil || 'N/A';
-                            if (nilai !== 'N/A') {
-                                nilai = nilai.trim(); // Bersihkan spasi
-                            }
-                            
-                            // Jika tidak ditemukan dengan properti 'nil', coba dengan fallback
-                            if (nilai === 'N/A') {
-                                nilai = findPropertyByValue(item, 'nilai') || findPropertyAggressively(item, 'nilai') || findPropertyByPattern(item, [
-                                    'nilai', 'nilai_akhir', 'grade', 'huruf', 'nilai_huruf',
-                                    'final_grade', 'letter_grade', 'score', 'mark', 'nilai', 'grade', 'huruf',
-                                    'nilai_huruf', 'huruf_nilai', 'grade_nilai', 'nilai_grade'
-                                ]);
-                            }
-                            
-                            // Hitung bobot berdasarkan nilai
-                            const bobot = calculateBobot(nilai);
-                            
-                            // Coba cari kode mata kuliah yang benar (bukan NIM)
-                            let kodeMKReal = kodeMK;
-                            if (kodeMK === '202150' || kodeMK === nim) {
-                                // Jika kode MK sama dengan NIM, cari yang lain
-                                for (let key in item) {
-                                    let value = item[key];
-                                    if (typeof value === 'string' && value.length <= 10 && /^[A-Z0-9-]+$/i.test(value) && value !== '202150' && value !== nim) {
-                                        kodeMKReal = value;
-                                        break;
-                                    }
-                                }
-                            }
-                            
-                                                         // Hitung SKS x Bobot
-                             let finalSksxBobot = 'N/A';
-                             if (sks !== 'N/A' && bobot !== 'N/A') {
-                                 const sksNum = parseFloat(sks);
-                                 const bobotNum = parseFloat(bobot);
-                                 if (!isNaN(sksNum) && !isNaN(bobotNum)) {
-                                     // Gunakan nilai bobot yang tepat (tidak dibulatkan)
-                                     finalSksxBobot = (sksNum * bobotNum).toFixed(2);
-                                     console.log(`Perhitungan manual: ${sksNum} x ${bobotNum} = ${finalSksxBobot}`);
-                                 }
-                             }
-                            
-                            // Debug: tampilkan nilai yang ditemukan
-                            console.log(`Item ${index} - Kode MK: ${kodeMKReal}, Nama MK: ${namaMK}, SKS: ${sks}, Nilai: ${nilai}, Bobot: ${bobot}, SKSxBobot: ${finalSksxBobot}`);
-                            
-                            // Debug: tampilkan semua properti dan nilai untuk item ini
-                            console.log(`\n--- DEBUG ITEM ${index} ---`);
-                            console.log('Semua properti:', Object.keys(item));
-                            console.log('Semua nilai:', Object.values(item));
-                            console.log('Raw item:', JSON.stringify(item, null, 2));
-                            
-                            // Cari properti yang berisi nilai huruf
-                            console.log('Properti yang berisi nilai huruf:');
-                            for (let key in item) {
-                                let value = item[key];
-                                if (typeof value === 'string' && /^[A-F][+-]?$/i.test(value)) {
-                                    console.log(`  ${key}: ${value}`);
-                                }
-                            }
-                            
-                            // Cari properti yang berisi angka bobot
-                            console.log('Properti yang berisi angka bobot:');
-                            for (let key in item) {
-                                let value = item[key];
-                                if ((typeof value === 'number' && value >= 0 && value <= 4) || 
-                                    (typeof value === 'string' && /^[0-4](\.[0-9]+)?$/.test(value))) {
-                                    console.log(`  ${key}: ${value}`);
-                                }
-                            }
-                            
-                            // Cari properti yang berisi kode mata kuliah (bukan NIM)
-                            console.log('Properti yang berisi kode mata kuliah:');
-                            for (let key in item) {
-                                let value = item[key];
-                                if (typeof value === 'string' && value.length <= 10 && /^[A-Z0-9]+$/i.test(value) && value !== '202150') {
-                                    console.log(`  ${key}: ${value}`);
-                                }
-                            }
-                            
-                            // Cari properti yang berisi angka yang bukan SKS
-                            console.log('Properti yang berisi angka (bukan SKS):');
-                            for (let key in item) {
-                                let value = item[key];
-                                if (typeof value === 'number' && value > 0 && value <= 4 && value !== parseFloat(sks)) {
-                                    console.log(`  ${key}: ${value}`);
-                                }
-                                if (typeof value === 'string' && /^[0-4](\.[0-9]+)?$/.test(value) && parseFloat(value) !== parseFloat(sks)) {
-                                    console.log(`  ${key}: ${value}`);
-                                }
-                            }
-                            
-                            // Tampilkan hasil pencarian
-                            console.log(`\n--- HASIL PENCARIAN ITEM ${index} ---`);
-                            console.log(`Kode MK yang ditemukan: ${kodeMKReal}`);
-                            console.log(`Nilai yang ditemukan: ${nilai}`);
-                            console.log(`Bobot yang ditemukan: ${bobot}`);
-                            console.log(`SKS x Bobot yang ditemukan: ${finalSksxBobot}`);
-                            
-                            tableBody.innerHTML += `<tr><td>${index + 1}</td><td>${kodeMKReal}</td><td>${namaMK}</td><td>${sks}</td><td>${nilai}</td><td>${bobot}</td><td>${finalSksxBobot}</td></tr>`;
-                        });
-
-                        // Gunakan properti yang benar untuk total dan IPK
-                        let totalSKS = 0;
-                        let totalBobot = 0;
-                        let totalSksxBobot = 0;
-                        
-                                                 // Hitung total dari data yang ada
-                         studentDataArray.forEach(item => {
-                             const sks = parseFloat(item.SKS) || 0;
-                             const nilai = item.nil ? item.nil.trim() : '';
-                             const bobot = calculateBobot(nilai);
-                             
-                             if (sks > 0 && bobot !== 'N/A') {
-                                 totalSKS += sks;
-                                 totalBobot += bobot;
-                                 totalSksxBobot += (sks * bobot);
-                             }
-                         });
-                         
-                         // Hitung IPK dengan nilai bobot yang tepat
-                         const ipk = totalSKS > 0 ? (totalSksxBobot / totalSKS).toFixed(2) : 'N/A';
-                        
-                        tableFoot.innerHTML = `<tr><th colspan="3">Total SKS</th><th>${totalSKS}</th><th colspan="2">IPK</th><th>${ipk}</th></tr>`;
-                        tableContainer.style.display = 'block';
-                    } else {
-                        console.error('Struktur data tidak sesuai:', actualData);
-                        showError(`Data transkrip untuk NIM ${nim} tidak ditemukan atau struktur data tidak sesuai. Silakan cek konsol browser (F12) untuk melihat struktur data yang diterima.`);
+                    // Coba cari data transkrip
+                    const studentDataArray = result.data || result.transkrip || result.nilai || (Array.isArray(result) ? result : null);
+                    if (!studentDataArray || !Array.isArray(studentDataArray) || studentDataArray.length === 0) {
+                        throw new Error('Data transkrip tidak ditemukan dalam respons API.');
                     }
+                    
+                    const studentInfo = studentDataArray[0];
+
+                    const studentNim = findProperty(studentInfo, ['STB', 'nim', 'NIM', 'nim_mahasiswa']);
+                    const studentName = findProperty(studentInfo, ['NMMHS', 'nama', 'NAMA', 'nama_mahasiswa', 'nama_lengkap']);
+                    const studentProdi = findProperty(studentInfo, ['NMPRGSTD', 'prodi', 'PRODI', 'program_studi', 'jurusan']);
+
+                    studentInfoDiv.innerHTML = `<strong>NIM:</strong> ${studentNim}<br><strong>Nama:</strong> ${studentName}<br><strong>Program Studi:</strong> ${studentProdi}`;
+                    studentInfoDiv.style.display = 'block';
+
+                    let totalSKS = 0;
+                    let totalSksxBobot = 0;
+
+                    const tableRows = studentDataArray.map((item, index) => {
+                        const kodeMK = findProperty(item, ['KDMTK', 'kodemk', 'kode_mk', 'kode', 'mk']);
+                        const namaMK = findProperty(item, ['NMMTK', 'namamk', 'nama_mk', 'mata_kuliah', 'nama_mata_kuliah']);
+                        const sks = parseFloat(findProperty(item, ['SKS', 'sks', 'credits'])) || 0;
+                        const nilai = findProperty(item, ['nil', 'nilai', 'grade', 'nilai_huruf', 'huruf']);
+                        const bobot = calculateBobot(nilai);
+                        const sksxBobot = (sks > 0 && bobot !== 'N/A') ? (sks * bobot) : 0;
+
+                        if (sks > 0 && bobot !== 'N/A') {
+                            totalSKS += sks;
+                            totalSksxBobot += sksxBobot;
+                        }
+
+                        return `<tr>
+                            <td>${index + 1}</td>
+                            <td>${kodeMK}</td>
+                            <td>${namaMK}</td>
+                            <td>${sks}</td>
+                            <td>${nilai}</td>
+                            <td>${bobot}</td>
+                            <td>${sksxBobot.toFixed(2)}</td>
+                        </tr>`;
+                    }).join('');
+
+                    tableBody.innerHTML = tableRows;
+
+                    const ipk = totalSKS > 0 ? (totalSksxBobot / totalSKS).toFixed(2) : 'N/A';
+                    tableFoot.innerHTML = `<tr><th colspan="3">Total SKS</th><th>${totalSKS}</th><th colspan="2">IPK</th><th>${ipk}</th></tr>`;
+                    tableContainer.style.display = 'block';
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                     showError('Gagal mengambil atau memproses data. Cek konsol browser (F12) untuk detail.');
                 });
         });
-        
-        // Mobile-specific enhancements
-        function addMobileEnhancements() {
-            // Touch-friendly scrolling untuk table container
-            const tableContainer = document.getElementById('table-container');
-            if (tableContainer) {
-                let isScrolling = false;
-                let startX = 0;
-                let scrollLeft = 0;
-                
-                tableContainer.addEventListener('touchstart', function(e) {
-                    isScrolling = true;
-                    startX = e.touches[0].pageX - tableContainer.offsetLeft;
-                    scrollLeft = tableContainer.scrollLeft;
-                });
-                
-                tableContainer.addEventListener('touchmove', function(e) {
-                    if (!isScrolling) return;
-                    e.preventDefault();
-                    const x = e.touches[0].pageX - tableContainer.offsetLeft;
-                    const walk = (x - startX) * 2;
-                    tableContainer.scrollLeft = scrollLeft - walk;
-                });
-                
-                tableContainer.addEventListener('touchend', function() {
-                    isScrolling = false;
-                });
-            }
-            
-            // Optimasi untuk mobile performance
-            if ('serviceWorker' in navigator) {
-                // Preload data untuk mobile
-                const preloadData = () => {
-                    // Cache data jika diperlukan
-                    if ('caches' in window) {
-                        // Implementasi cache jika diperlukan
-                    }
-                };
-                
-                // Preload setelah DOM loaded
-                setTimeout(preloadData, 1000);
-            }
-            
-            // Responsive table behavior
-            const handleTableResponsiveness = () => {
-                const table = document.getElementById('transcript-table');
-                if (table && window.innerWidth <= 768) {
-                    // Tambahkan class untuk mobile styling
-                    table.classList.add('mobile-table');
-                    
-                    // Optimasi untuk mobile scrolling
-                    table.style.minWidth = '600px';
-                }
-            };
-            
-            // Handle resize events
-            window.addEventListener('resize', handleTableResponsiveness);
-            handleTableResponsiveness(); // Initial call
-            
-            // Touch feedback untuk buttons
-            const buttons = document.querySelectorAll('.back-button');
-            buttons.forEach(button => {
-                button.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.95)';
-                });
-                
-                button.addEventListener('touchend', function() {
-                    this.style.transform = 'scale(1)';
-                });
-            });
-        }
-        
-        // Initialize mobile enhancements setelah data loaded
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', addMobileEnhancements);
-        } else {
-            addMobileEnhancements();
-        }
     </script>
 </body>
 </html>
