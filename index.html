@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Transkrip Mahasiswa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .form-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .form-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1em;
+        }
+        
+        .form-group input {
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1.1em;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .content-section {
+            padding: 30px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-size: 1.2em;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4facfe;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #bee5eb;
+            margin-bottom: 20px;
+        }
+        
+        .info-box strong {
+            color: #0a3d42;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Data Transkrip Mahasiswa</h1>
+            <p>Sistem Informasi Akademik - Universitas</p>
+        </div>
+        
+        <div class="form-section">
+            <div class="form-group">
+                <label for="nimInput">Masukkan NIM:</label>
+                <input type="text" id="nimInput" placeholder="Contoh: 202150" value="202125">
+                <button class="btn" onclick="fetchData()">🔍 Cari Data</button>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div id="infoBox" class="info-box" style="display: none;">
+                <strong>Info:</strong> Menampilkan data untuk NIM: <span id="currentNim"></span>
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Sedang mengambil data...</p>
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div id="tableContainer" class="table-container" style="display: none;">
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Mata Kuliah</th>
+                            <th>Nama Mata Kuliah</th>
+                            <th>SKS</th>
+                            <th>Nilai</th>
+                            <th>Semester</th>
+                            <th>Tahun Ajaran</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="noData" class="no-data" style="display: none;">
+                <p>Tidak ada data yang ditemukan untuk NIM tersebut.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk mengambil data dari API
+        async function fetchData() {
+            const nimInput = document.getElementById('nimInput').value.trim();
+            
+            if (!nimInput) {
+                showError('Mohon masukkan NIM terlebih dahulu!');
+                return;
+            }
+            
+            // Tampilkan loading
+            showLoading();
+            hideError();
+            hideTable();
+            hideNoData();
+            
+            try {
+                const apiUrl = `http://103.164.170.234:8081/api/public/mhstranskrip/${nimInput}?api=01071194`;
+                
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Sembunyikan loading
+                hideLoading();
+                
+                // Tampilkan info box
+                showInfoBox(nimInput);
+                
+                // Proses dan tampilkan data
+                if (data && Array.isArray(data) && data.length > 0) {
+                    displayData(data);
+                } else {
+                    showNoData();
+                }
+                
+            } catch (error) {
+                hideLoading();
+                showError(`Error: ${error.message}. Pastikan NIM valid dan koneksi internet stabil.`);
+                console.error('Error fetching data:', error);
+            }
+        }
+        
+        // Fungsi untuk menampilkan data dalam tabel
+        function displayData(data) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.kode_mk || '-'}</td>
+                    <td>${item.nama_mk || '-'}</td>
+                    <td>${item.sks || '-'}</td>
+                    <td>${item.nilai || '-'}</td>
+                    <td>${item.semester || '-'}</td>
+                    <td>${item.tahun_ajaran || '-'}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            showTable();
+        }
+        
+        // Fungsi untuk menampilkan loading
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+        
+        // Fungsi untuk menyembunyikan loading
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        // Fungsi untuk menampilkan error
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        // Fungsi untuk menyembunyikan error
+        function hideError() {
+            document.getElementById('error').style.display = 'none';
+        }
+        
+        // Fungsi untuk menampilkan tabel
+        function showTable() {
+            document.getElementById('tableContainer').style.display = 'block';
+        }
+        
+        // Fungsi untuk menyembunyikan tabel
+        function hideTable() {
+            document.getElementById('tableContainer').style.display = 'none';
+        }
+        
+        // Fungsi untuk menampilkan pesan tidak ada data
+        function showNoData() {
+            document.getElementById('noData').style.display = 'block';
+        }
+        
+        // Fungsi untuk menyembunyikan pesan tidak ada data
+        function hideNoData() {
+            document.getElementById('noData').style.display = 'none';
+        }
+        
+        // Fungsi untuk menampilkan info box
+        function showInfoBox(nim) {
+            document.getElementById('currentNim').textContent = nim;
+            document.getElementById('infoBox').style.display = 'block';
+        }
+        
+        // Event listener untuk input NIM (Enter key)
+        document.getElementById('nimInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                fetchData();
+            }
+        });
+        
+        // Auto-focus pada input NIM saat halaman dimuat
+        window.addEventListener('load', function() {
+            document.getElementById('nimInput').focus();
+        });
+        
+        // Fetch data awal dengan NIM default
+        window.addEventListener('load', function() {
+            fetchData();
+        });
+    </script>
+</body>
+</html>
