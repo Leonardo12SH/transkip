@@ -100,6 +100,93 @@
         .table-striped tbody tr:nth-of-type(odd) {
             background-color: #f8f9fa; /* Warna striping yang sama dengan info */
         }
+        
+        /* Jarak di atas tabel */
+        #table-container {
+            margin-top: 30px;
+        }
+        
+        /* Responsive table styling untuk mobile */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px 15px;
+                margin: 10px;
+            }
+            
+            .table-responsive {
+                margin: 0 -15px;
+                width: calc(100% + 30px);
+            }
+            
+            #transcript-table {
+                font-size: 14px;
+                min-width: 600px; /* Minimum width untuk memastikan tabel tidak terlalu sempit */
+            }
+            
+            #transcript-table th,
+            #transcript-table td {
+                padding: 8px 6px;
+                white-space: nowrap;
+                vertical-align: middle;
+            }
+            
+            /* Kolom yang bisa di-wrap */
+            #transcript-table td:nth-child(3) { /* Nama Mata Kuliah */
+                white-space: normal;
+                min-width: 120px;
+                max-width: 150px;
+            }
+            
+            /* Scroll horizontal yang lebih smooth */
+            .table-responsive::-webkit-scrollbar {
+                height: 8px;
+            }
+            
+            .table-responsive::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+            }
+            
+            .table-responsive::-webkit-scrollbar-thumb {
+                background: #667eea;
+                border-radius: 4px;
+            }
+            
+            .table-responsive::-webkit-scrollbar-thumb:hover {
+                background: #5a6fd8;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 576px) {
+            .container {
+                width: 98%;
+                padding: 15px 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            #student-info {
+                margin-bottom: 35px;
+            }
+            
+            #table-container {
+                margin-top: 25px;
+            }
+            
+            #transcript-table {
+                font-size: 13px;
+                min-width: 550px;
+            }
+            
+            #transcript-table th,
+            #transcript-table td {
+                padding: 6px 4px;
+            }
+        }
     </style>
 </head>
 <body>
