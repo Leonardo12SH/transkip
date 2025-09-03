@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#667eea">
+    <title>Input NIM - Sistem Transkrip</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; }
+        h1 { color: #333; margin-bottom: 30px; font-size: 28px; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
+        input[type="text"] { width: 100%; padding: 12px 15px; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 16px; transition: border-color 0.3s ease; box-sizing: border-box; }
+        input[type="text"]:focus { outline: none; border-color: #667eea; }
+        button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease; width: 100%; }
+        button:hover { transform: translateY(-2px); }
+        
+        /* Responsive Design untuk Mobile */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 30px 20px;
+                max-width: 90%;
+            }
+            
+            h1 {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            input[type="text"] {
+                padding: 15px;
+                font-size: 16px; /* Mencegah zoom di iOS */
+            }
+            
+            button {
+                padding: 18px 30px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                padding: 25px 15px;
+                max-width: 95%;
+            }
+            
+            h1 {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+            
+            input[type="text"] {
+                padding: 14px;
+            }
+            
+            button {
+                padding: 16px 25px;
+            }
+        }
+        
+        /* Touch-friendly untuk mobile */
+        @media (pointer: coarse) {
+            input[type="text"] {
+                padding: 16px;
+            }
+            
+            button {
+                padding: 18px 30px;
+            }
+        }
+        
+        /* Animasi smooth */
+        .container, input, button {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏫 Sistem Transkrip</h1>
+        <form id="nimForm">
+            <div class="form-group">
+                <label for="nim">Masukkan NIM:</label>
+                <input type="text" id="nim" name="nim" placeholder="Contoh: 232121" required pattern="[0-9]+" title="NIM harus berupa angka">
+            </div>
+            <button type="submit">Lihat Data Transkrip</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('nimForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nim = document.getElementById('nim').value.trim();
+            if (nim) {
+                // Arahkan ke table.html dengan parameter NIM
+                window.location.href = `table.html?nim=${nim}`;
+            }
+        });
+        document.getElementById('nim').focus();
+        
+        // Mobile-specific enhancements
+        function addMobileEnhancements() {
+            // Touch feedback untuk button
+            const button = document.querySelector('button');
+            if (button) {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
+            
+            // Optimasi input untuk mobile
+            const input = document.getElementById('nim');
+            if (input) {
+                // Mencegah zoom di iOS
+                input.addEventListener('focus', function() {
+                    this.style.fontSize = '16px';
+                });
+                
+                // Validasi real-time
+                input.addEventListener('input', function() {
+                    const value = this.value;
+                    if (value && !/^[0-9]+$/.test(value)) {
+                        this.setCustomValidity('NIM harus berupa angka saja');
+                    } else {
+                        this.setCustomValidity('');
+                    }
+                });
+            }
+            
+            // Responsive behavior
+            const handleResponsiveness = () => {
+                const container = document.querySelector('.container');
+                if (window.innerWidth <= 768) {
+                    container.style.maxWidth = '90%';
+                } else {
+                    container.style.maxWidth = '400px';
+                }
+            };
+            
+            window.addEventListener('resize', handleResponsiveness);
+            handleResponsiveness(); // Initial call
+        }
+        
+        // Initialize mobile enhancements
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', addMobileEnhancements);
+        } else {
+            addMobileEnhancements();
+        }
+    </script>
+</body>
+</html>
